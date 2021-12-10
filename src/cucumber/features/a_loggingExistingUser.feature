@@ -1,4 +1,4 @@
-Feature: Automated Tester Course - Logging in
+Feature: Logging Existing User
 
   Scenario: Logging in to https://mystore-testlab.coderslab.pl
     Given login form is open

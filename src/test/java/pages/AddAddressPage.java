@@ -83,20 +83,26 @@ public class AddAddressPage extends BasePage {
         linkCreateNewAddress.click();
     }
 
-    public void listExistingAddresses() {
-        List<WebElement> addresses = driver.findElements(By.xpath("//*[starts-with(@id,'address-')]"));
-        for (WebElement address : addresses){
+    public String compareAddresses() {
+        List<WebElement> addresses = driver.findElements(By.className("address-body"));
+        for (WebElement address : addresses) {
             address.getText();
         }
         WebElement lastAddress = addresses.get(1);
-        List<WebElement> listOFAddresses = lastAddress.findElements(By.className("address-body"));
-        for (WebElement address : listOFAddresses) {
-            address.getText();
-        }
+        return lastAddress.getText();
     }
 
-    public String compareAddresses() {
-        List<WebElement> addresses = driver.findElements(By.className("address-body"));
+    public String getAliasName() {
+        List<WebElement> aliasName = driver.findElements(By.tagName("h4"));
+        for (WebElement alias : aliasName) {
+            alias.getText();
+        }
+        WebElement lastAlias = aliasName.get(1);
+        return lastAlias.getText();
+    }
+
+    public String getAddress() {
+        List<WebElement> addresses = driver.findElements(By.tagName("address"));
         for (WebElement address : addresses) {
             address.getText();
         }

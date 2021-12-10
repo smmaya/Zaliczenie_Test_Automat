@@ -1,4 +1,4 @@
-Feature: Automated Tester Course - Deleting last address
+Feature: Deleting Last Address
 
   Scenario: Deleting last created address
     Given logged in and at addresses page

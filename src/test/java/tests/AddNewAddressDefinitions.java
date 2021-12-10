@@ -42,10 +42,12 @@ public class AddNewAddressDefinitions {
         Assert.assertEquals("Address successfully added!", newAddressConfirmed.addConfirmation());
     }
 
-    @And("check if the newly created address is correct")
-    public void checkCreatedAddress() {
+    @And("^check if the newly created address \"(.*)\" is correct$")
+    public void checkCreatedAddress(String alias) {
         AddAddressPage checkAddress = new AddAddressPage(driver);
-        checkAddress.listExistingAddresses();
+        Assert.assertEquals(alias, checkAddress.getAliasName());
+        System.out.println(checkAddress.getAliasName());
+        System.out.println(checkAddress.getAddress());
         Assert.assertEquals("second address\n" +
                 "Sławek Majchrzak\n" +
                 "Jagiellońska 28\n" +
