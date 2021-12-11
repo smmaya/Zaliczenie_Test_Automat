@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.io.File;
+import org.apache.commons.io.FileUtils;
 
 public class CheckOutProcessPage extends BasePage{
 
@@ -186,8 +187,5 @@ public class CheckOutProcessPage extends BasePage{
         FileUtils.copyFile(source, new File("./src/test/screenshots/screenshot.png"));
         System.out.println("Screenshot");
     }
-    private static class FileUtils {
-        public static void copyFile(File source, File file) {
-        }
-    }
+
 }
