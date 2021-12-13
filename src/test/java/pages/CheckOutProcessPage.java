@@ -1,18 +1,16 @@
 package pages;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import java.io.File;
 import org.apache.commons.io.FileUtils;
 
-public class CheckOutProcessPage extends BasePage{
+public class CheckOutProcessPage extends BasePage {
 
     public CheckOutProcessPage(WebDriver driver) {
         super(driver);
     }
+
     // email input field
     @FindBy(xpath = "//*[@id=\"login-form\"]/section/div[1]/div[1]/input")
     private WebElement inputEmail;
@@ -96,7 +94,7 @@ public class CheckOutProcessPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"content\"]/table/tbody/tr[1]/td[2]")
     private WebElement paymentTotalAmount;
 
-    public void userLogin(){
+    public void userLogin() {
         inputEmail.click();
         inputEmail.clear();
         inputEmail.sendKeys("sm@sm.pl");
@@ -105,87 +103,109 @@ public class CheckOutProcessPage extends BasePage{
         inputPassword.sendKeys("1234qweasd");
         buttonSignInt.click();
     }
-    public String getUserName(){
+
+    public String getUserName() {
         return userInfo.getText();
     }
-    public Double checkDiscount(){
+
+    public Double checkDiscount() {
         double discountAmount = 0.2;
         String getRegularPrice = regularPrice.getText().substring(1);
         double convertStringToDouble = Double.parseDouble(getRegularPrice);
         return convertStringToDouble - (convertStringToDouble * discountAmount);
     }
-    public Double convertDiscountedPrice(){
+
+    public Double convertDiscountedPrice() {
         return Double.valueOf(currentDiscountedPrice.getText().substring(1));
     }
-    public void setClothesLink(){
+
+    public void setClothesLink() {
         clothesLink.click();
     }
-    public void setArticle(){
+
+    public void setArticle() {
         linkToHummingbirdSweater.click();
     }
-    public void setSizeToM(String size){
+
+    public void setSizeToM(String size) {
         sizesDropdown.click();
         sizesDropdown.sendKeys(size);
     }
-    public String getSelectedSize(){
+
+    public String getSelectedSize() {
         return selectedSizeDropdown.getText();
     }
-    public void setQuantity(String amount){
+
+    public void setQuantity(String amount) {
         quantity.click();
         quantity.clear();
         quantity.sendKeys("5");
     }
-    public void addToCartButtonAction(){
+
+    public void addToCartButtonAction() {
         addToCart.click();
     }
-    public String checkModalWindow(){
+
+    public String checkModalWindow() {
         return modalItemConfirmationWindow.getAttribute("class");
     }
-    public void proceedToCheckoutButton(){
+
+    public void proceedToCheckoutButton() {
         proceedToCheckoutButton.click();
     }
-    public void continueToCheckoutButton(){
+
+    public void continueToCheckoutButton() {
         cartProceedToCheckoutButton.click();
     }
-    public String displayAddressName(){
+
+    public String displayAddressName() {
         return addressRadioButton.getText();
     }
-    public void continueWithSelectedAddressButton(){
+
+    public void continueWithSelectedAddressButton() {
         addressConfirmButton.click();
     }
-    public void continueWithDeliveryButton(){
+
+    public void continueWithDeliveryButton() {
         deliveryConfirmButton.click();
     }
-    public void continueWithPaymentButton(){
+
+    public void continueWithPaymentButton() {
         paymentOption.click();
     }
-    public void agreeToTerms(){
+
+    public void agreeToTerms() {
         termsCheckbox.click();
     }
-    public void orderWithObligationToPay(){
+
+    public void orderWithObligationToPay() {
         orderWithAnObligationToPayButton.click();
     }
-    public String orderConfirmationTitle(){
+
+    public String orderConfirmationTitle() {
         return orderConfirmationTitle.getAttribute("id");
     }
-    public void clickOnUserName(){
+
+    public void clickOnUserName() {
         userInfo.click();
     }
-    public void historyLinkButton(){
+
+    public void historyLinkButton() {
         historyLink.click();
     }
-    public String verifyPaymentLabel(){
+
+    public String verifyPaymentLabel() {
         return paymentStatusText.getText();
     }
-    public String verifyTotalAmount(){
+
+    public String verifyTotalAmount() {
         return paymentTotalAmount.getText();
     }
 
-    public void takeOrderScreenShot() throws Exception{
-        TakesScreenshot ts = ((TakesScreenshot)driver);
+    public void takeOrderScreenShot() throws Exception {
+        TakesScreenshot ts = ((TakesScreenshot) driver);
         File source = ts.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(source, new File("./src/test/screenshots/screenshot.png"));
-        System.out.println("Screenshot");
     }
 
 }

@@ -48,8 +48,8 @@ public class CheckoutProcessDefinitions {
 
     @Then("that article's details page is displayed")
     public void that_article_s_details_page_is_displayed() {
-        HelperMethod articlesPage = new HelperMethod(driver);
-        assertEquals("https://mystore-testlab.coderslab.pl/index.php?id_product=2&id_product_attribute=9&rewrite=brown-bear-printed-sweater&controller=product#/1-size-s", articlesPage.checkHTTPAddress());
+        HelperMethod articleDetailsPage = new HelperMethod(driver);
+        assertEquals("https://mystore-testlab.coderslab.pl/index.php?id_product=2&id_product_attribute=9&rewrite=brown-bear-printed-sweater&controller=product#/1-size-s", articleDetailsPage.checkHTTPAddress());
     }
 
     @Then("checking if discount is applied correctly")
@@ -66,12 +66,12 @@ public class CheckoutProcessDefinitions {
 
     @Then("^the \"(.*)\" size is selected$")
     public void the_size_is_selected(String size) {
-        CheckOutProcessPage getSize = new CheckOutProcessPage(driver);
-        Assert.assertEquals("M", getSize.getSelectedSize());
+        CheckOutProcessPage checkSize = new CheckOutProcessPage(driver);
+        Assert.assertEquals("M", checkSize.getSelectedSize());
     }
 
     @When("^changing \"(.*)\" to \"(.*)\" and clicking Add to Cart button$")
-    public void changing_to_and_clicking_add_to_cart_button(String quantity, String amount) {
+    public void changing_quantity_and_clicking_add_to_cart_button(String quantity, String amount) {
         CheckOutProcessPage setAmount = new CheckOutProcessPage(driver);
         setAmount.setQuantity(amount);
         CheckOutProcessPage addToCart = new CheckOutProcessPage(driver);
@@ -92,8 +92,8 @@ public class CheckoutProcessDefinitions {
 
     @Then("redirected ot the cart page")
     public void redirected_ot_the_cart_page() {
-        HelperMethod articlesPage = new HelperMethod(driver);
-        assertEquals("https://mystore-testlab.coderslab.pl/index.php?controller=cart&action=show", articlesPage.checkHTTPAddress());
+        HelperMethod cart = new HelperMethod(driver);
+        assertEquals("https://mystore-testlab.coderslab.pl/index.php?controller=cart&action=show", cart.checkHTTPAddress());
     }
 
     @When("selecting Proceed to Checkout button")
@@ -152,14 +152,14 @@ public class CheckoutProcessDefinitions {
 
     @When("clicking on the user's name")
     public void clicking_on_the_user_s_name() {
-        CheckOutProcessPage user = new CheckOutProcessPage(driver);
-        user.clickOnUserName();
+        CheckOutProcessPage userName = new CheckOutProcessPage(driver);
+        userName.clickOnUserName();
     }
 
     @When("clicking on the Order History and Details button")
     public void clicking_on_the_order_history_and_details_button() {
-        CheckOutProcessPage history = new CheckOutProcessPage(driver);
-        history.historyLinkButton();
+        CheckOutProcessPage historyButton = new CheckOutProcessPage(driver);
+        historyButton.historyLinkButton();
     }
 
     @Then("Orders History page is displaying a list of orders")
@@ -172,15 +172,14 @@ public class CheckoutProcessDefinitions {
     public void check_the_status_name_as_awaiting_check_payment_of_the_latest_order() {
         CheckOutProcessPage statusLabel = new CheckOutProcessPage(driver);
         Assert.assertEquals("Awaiting check payment", statusLabel.verifyPaymentLabel());
-        System.out.println(statusLabel.verifyPaymentLabel());
+        System.out.println("Status text: " + statusLabel.verifyPaymentLabel());
     }
 
     @Then("check the total amount of the latest order")
     public void check_the_total_amount_of_the_latest_order() {
         CheckOutProcessPage totalAmount = new CheckOutProcessPage(driver);
         Assert.assertEquals("143.60", totalAmount.verifyTotalAmount().substring(1));
-        System.out.println(totalAmount.verifyTotalAmount());
+        System.out.println("Total amount: " + totalAmount.verifyTotalAmount().substring(1));
         driver.quit();
     }
-
 }
